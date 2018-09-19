@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python 爬虫," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,16 @@
 
 
 
-<meta name="description" content="##爬虫应用##  搜索引擎 google/baidu page rank 数据统计分析">
-<meta name="keywords" content="python 爬虫">
-<meta property="og:type" content="article">
-<meta property="og:title" content="爬虫基础">
-<meta property="og:url" content="http://yoursite.com/2018/05/25/爬虫基础/index.html">
+<meta name="description" content="Be Strong.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aicozone&#39;s Blog">
+<meta property="og:url" content="http://yoursite.com/tags/flask—wtforms/index.html">
 <meta property="og:site_name" content="Aicozone&#39;s Blog">
-<meta property="og:description" content="##爬虫应用##  搜索引擎 google/baidu page rank 数据统计分析">
+<meta property="og:description" content="Be Strong.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-12T12:27:04.813Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="爬虫基础">
-<meta name="twitter:description" content="##爬虫应用##  搜索引擎 google/baidu page rank 数据统计分析">
+<meta name="twitter:title" content="Aicozone&#39;s Blog">
+<meta name="twitter:description" content="Be Strong.">
 
 
 
@@ -120,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/25/爬虫基础/"/>
+  <link rel="canonical" href="http://yoursite.com/tags/flask—wtforms/"/>
 
 
 
 
 
-  <title>爬虫基础 | Aicozone's Blog</title>
+  <title>标签: flask—wtforms | Aicozone's Blog</title>
   
 
 
@@ -145,7 +143,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -249,177 +247,54 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>flask—wtforms<small>标签</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/25/爬虫基础/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zhang Cong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/tianxing.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Aicozone's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">爬虫基础</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+            <a class="post-title-link" href="/2018/09/19/admin-login/" itemprop="url">
               
-                <span class="post-meta-item-text">发表于</span>
+                <span itemprop="name">后台管理员登录逻辑的开发</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T13:36:09+08:00">
-                2018-05-25
-              </time>
-            
+            </a>
+        
+      </h2>
 
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-09-19T22:24:37+08:00"
+              content="2018-09-19" >
+          09-19
+        </time>
+      </div>
 
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>##爬虫应用##</p>
-<ul>
-<li>搜索引擎 google/baidu page rank</li>
-<li><p>数据统计分析</p>
-<a id="more"></a>
-<p>##需要爬的页面##</p>
-</li>
-<li><p>googl/baidu 裸请求</p>
-</li>
-<li>有反爬虫策略的网站</li>
-<li>js频繁上新的页面</li>
-</ul>
-<p>##爬虫脚本组成部分##</p>
-<ul>
-<li>downloader 下载页面</li>
-<li>HTML parser 解析页面            pyquery lxml</li>
-<li>datamodel 字段-element         业务逻辑</li>
-</ul>
-<p>##下载页面的爬虫库选用##</p>
-<ul>
-<li>普通页面: requests</li>
-<li>js频繁上新的页面: 用selenium来伪装浏览器</li>
-</ul>
-<p>##注意事项##</p>
-<ul>
-<li>先下载页面，如果没有更新过应该不在下载第二次. 这个拆分可以方便逻辑的扩展</li>
-</ul>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/python-爬虫/" rel="tag"># python 爬虫</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/05/23/no3/" rel="next" title="远程Linux主机配置">
-                <i class="fa fa-chevron-left"></i> 远程Linux主机配置
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/13/flask-blueprint/" rel="prev" title="flask_blueprint">
-                flask_blueprint <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
       
     </div>
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -427,10 +302,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -679,10 +550,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
