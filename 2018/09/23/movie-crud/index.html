@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="flask form," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 后台页面的电影管理1. 添加电影 2. 电影列表 3. 删除电影 4. 编辑电影">
+<meta name="keywords" content="flask form">
+<meta property="og:type" content="article">
+<meta property="og:title" content="movie_crud">
+<meta property="og:url" content="http://yoursite.com/2018/09/23/movie-crud/index.html">
+<meta property="og:site_name" content="Aicozone&#39;s Blog">
+<meta property="og:description" content="1. 后台页面的电影管理1. 添加电影 2. 电影列表 3. 删除电影 4. 编辑电影">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-23T07:33:17.981Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="movie_crud">
+<meta name="twitter:description" content="1. 后台页面的电影管理1. 添加电影 2. 电影列表 3. 删除电影 4. 编辑电影">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/23/movie-crud/"/>
+
+
+
+
+
+  <title>movie_crud | Aicozone's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aicozone's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">There is always a way out.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/23/movie-crud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhang Cong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/tianxing.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aicozone's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">movie_crud</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-23T13:44:22+08:00">
+                2018-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-后台页面的电影管理"><a href="#1-后台页面的电影管理" class="headerlink" title="1. 后台页面的电影管理"></a>1. 后台页面的电影管理</h1><pre><code>1. 添加电影
+2. 电影列表
+3. 删除电影
+4. 编辑电影
+</code></pre><a id="more"></a>
+<h1 id="2-添加电影"><a href="#2-添加电影" class="headerlink" title="2. 添加电影"></a>2. 添加电影</h1><pre><code>1. 在forms.py中建立MovieForm,并根据相应字段填写描述
+2. 在views.py中创建MovieForm的实例，并传入模板进行渲染
+3. 在views.py中接收表单传过来的数据，并进行相应的逻辑修改
+</code></pre><h2 id="2-1-MovieForm的创建"><a href="#2-1-MovieForm的创建" class="headerlink" title="2.1 MovieForm的创建"></a>2.1 MovieForm的创建</h2><p>示例： </p>
+<pre><code>class MovieForm(FlaskForm):
+&quot;&quot;&quot;电影管理表单&quot;&quot;&quot;
+title = StringField(
+    label=&quot;片名&quot;,
+    validators=[
+        DataRequired(&quot;请输入片名！&quot;)
+    ],
+    description=&quot;片名&quot;,
+    render_kw={
+        &quot;class&quot;: &quot;form-control&quot;,
+        &quot;id&quot;: &quot;input_title&quot;,
+        &quot;placeholder&quot;: &quot;请输入片名！&quot;,
+    }
+)
+</code></pre><p>其中，<code>label</code>和<code>render_kw</code>可以传入模板代替<code>&lt;label&gt;</code>和<code>&lt;input&gt;</code>标签，而validators的作用是判断上传数据是否为空。若为空，可通过以下代码在网页中渲染出错误：</p>
+<pre><code>{% for err in form.title.errors %}
+    <div class="col-md-12">
+    <font style="color:red">{{ err }}</font>
+    </div>
+    {% endfor %}
+</code></pre><p>其中，wtforms的不同字段可以替换不同的标签：</p>
+<pre><code>1.PasswordField 替换密码输入框
+2.SubmitField 替换提交按钮
+3.FileField 替换文件上传框
+4.TextAreaField 替换文本框
+5.SelectField 替换单选框，需要添加参数：
+    coerce=int, # 设置限定数据类型
+    choices=[(v.id, v.name) for v in tags], # 设置选项
+</code></pre><h2 id="2-2-MovieForm的实例创建及模板渲染"><a href="#2-2-MovieForm的实例创建及模板渲染" class="headerlink" title="2.2 MovieForm的实例创建及模板渲染"></a>2.2 MovieForm的实例创建及模板渲染</h2><p>实例创建示例：</p>
+<pre><code>form = MovieForm()    
+render_template(&quot;admin/movie_add.html&quot;, form=form)
+</code></pre><p>模板渲染示例：</p>
+<pre><code>&lt;label for=&quot;input_logo&quot;&gt;{{ form.logo.label }}&lt;/label&gt;
+{{ form.logo }}
+</code></pre><p>其中，仅替换文本内容，替换整个input标签。</p>
+<h2 id="2-3-数据的接收与其逻辑判断"><a href="#2-3-数据的接收与其逻辑判断" class="headerlink" title="2.3 数据的接收与其逻辑判断"></a>2.3 数据的接收与其逻辑判断</h2><p>示例：</p>
+<pre><code>if form.validate_on_submit():
+    # 取出数据
+    data = form.data
+    # 得到上传文件的文件名    
+    file_url = form.url.data.filename
+    file_logo = form.logo.data.filename
+    # 是否存在该文件夹，不存在则创建
+    if not os.path.exists(app.config[&apos;UP_DIR&apos;]):
+        os.makedirs(app.config[&apos;UP_DIR&apos;])
+        os.chmod(app.config[&apos;UP_DIR&apos;], &apos;rw&apos;)
+    # 改变文件名并保存到文件夹
+    url = change_filename(file_url)
+    logo = change_filename(file_logo)
+    form.url.data.save(app.config[&apos;UP_DIR&apos;] + url)
+    form.logo.data.save(app.config[&apos;UP_DIR&apos;] + logo)
+    # 修改数据
+    movie = Movie(
+        title=data[&quot;title&quot;],
+        url=url,
+        info=data[&apos;info&apos;],
+        logo=logo,
+        star=int(data[&apos;star&apos;]),
+        play_num=0,
+        comment_num=0,
+        tag_id=int(data[&apos;tag_id&apos;]),
+        area=data[&apos;area&apos;],
+        release_time=data[&apos;release_time&apos;],
+        length=data[&apos;length&apos;],
+    )
+    # 保存数据
+    db.session.add(movie)
+    db.session.commit()
+    flash(&quot;添加电影成功！&quot;, &quot;ok&quot;)
+    return redirect(url_for(&quot;admin.movie_add&quot;))
+</code></pre><p>其中，分为数据的得到，数据的修改和数据的保存。若需要保存上传文件的地址，需要设置<code>app.config[&#39;UP_DIR&#39;]</code>。flash的闪现消息需要在模板中渲染，如下：</p>
+<pre><code>{% for msg in get_flashed_messages(category_filter=["ok"]) %}
+    <div class="alert alert-danger alert-dismissible">
+    	{{ msg }}
+   	</div>
+    {% endfor %}
+</code></pre><h1 id="3-电影列表"><a href="#3-电影列表" class="headerlink" title="3. 电影列表"></a>3. 电影列表</h1><pre><code>1. 在views.py中设置页面信息
+2. 在movie_list.html中渲染模板
+</code></pre><h2 id="3-1-页面信息的创建"><a href="#3-1-页面信息的创建" class="headerlink" title="3.1 页面信息的创建"></a>3.1 页面信息的创建</h2><p>示例：</p>
+<pre><code># 分页信息
+page_data = Movie.query.join(Movietag).filter(
+    Movietag.id == Movie.tag_id
+).order_by(
+    Movie.addtime
+).paginate(page=page, per_page=10)
+</code></pre><p>其中，query是查询，join是连接相关表，filter是连结条件，order_by是排序规则，paginate是<code>flask_sqlalchemy</code>的分页函数。</p>
+<h2 id="3-2-模板的渲染"><a href="#3-2-模板的渲染" class="headerlink" title="3.2 模板的渲染"></a>3.2 模板的渲染</h2><p>示例（提取出movie的信息）：</p>
+<pre><code>{% for v in page_data.items %} 
+		{{ v.id }}
+	{% endfor %}
+</code></pre><p>示例（分页模板的搭建）：</p>
+<pre><code>{% macro page(data, url) %}
+	{% if data %}
+	<ul class="pagination pagination-sm no-margin pull-right">
+	    <li><a href="{{url_for(url, page=1)}}">首页</a></li>
+	    {% if data.has_prev %}
+	    <li><a href="{{url_for(url, page=data.prev_num)}}">上一页</a></li>
+	    {% else %}
+	    <li class="disabled"><a href="#">上一页</a></li>
+	    {% endif %}
+	
+	    {% for v in data.iter_pages() %}
+	        {% if v == data.page %}
+	        <li class="active"><a href="#">{{ v }}</a></li>
+	        {% else %}
+	        <li><a href="{{url_for(url, page=v)}}">{{ v }}</a></li>
+	        {% endif %}
+	    {% endfor %}
+	
+	    {% if data.has_next %}
+	    <li><a href="{{url_for(url, page=data.next_num)}}">下一页</a></li>
+	    {% else %}
+	    <li class="disabled"><a href="#">下一页</a></li>
+	    {% endif %}
+	
+	    <li><a href="{{url_for(url, page=data.pages)}}">尾页</a></li>
+	</ul>
+	{% endif %}
+	{% endmacro %}
+</code></pre><p>分页模板使用：</p>
+<pre><code>1.先导入
+    {% import "ui/admin_page.html" as pg%}
+2.相应的div中调用
+    {{ pg.page(page_data, 'admin.movie_list')}}
+</code></pre><p>其中，<code>page_data</code>是分页信息，<code>admin.movie_list</code>是路由规则。</p>
+<h1 id="4-电影删除"><a href="#4-电影删除" class="headerlink" title="4.电影删除"></a>4.电影删除</h1><pre><code>1. 在模板中设置删除按钮
+2. 在views.py中增加删除逻辑
+</code></pre><h2 id="4-1-设置删除按钮"><a href="#4-1-设置删除按钮" class="headerlink" title="4.1 设置删除按钮"></a>4.1 设置删除按钮</h2><p>根据id来删除电影：</p>
+<pre><code>&lt;a href=&quot;{{url_for('admin.movie_del', id=v.id)}}&quot; class=&quot;label label-danger&quot;&gt;删除&lt;/a&gt;
+</code></pre><h2 id="4-2-增加删除逻辑"><a href="#4-2-增加删除逻辑" class="headerlink" title="4.2 增加删除逻辑"></a>4.2 增加删除逻辑</h2><p>示例：</p>
+<pre><code>def movie_del(id=None):
+    movie = Movie.query.get_or_404(id)
+    db.session.delete(movie)
+    db.session.commit()
+    flash(&quot;删除电影成功&quot;, &quot;ok&quot;)
+    return redirect(url_for(&quot;admin.movie_list&quot;, page=1))
+</code></pre><p>其中，先根据id查询到相关电影，并在数据库中删除，闪现消息可以在movie_list.html中显示，再重定向到movie_list界面。</p>
+<h1 id="5-电影编辑"><a href="#5-电影编辑" class="headerlink" title="5. 电影编辑"></a>5. 电影编辑</h1><pre><code>1. 通过id找到相关电影，并传入新创建的模板：movie_edit.html
+2. 当修改数据并提交后，对相应数据进行修改后保存
+</code></pre><h2 id="5-1-movie-edit-html的创建"><a href="#5-1-movie-edit-html的创建" class="headerlink" title="5.1 movie_edit.html的创建"></a>5.1 movie_edit.html的创建</h2><p>与添加页面相似，但需要渲染movie的初始值。方法如下：</p>
+<pre><code>1. 根据form模板建立，设置value值：
+    {{ form.area(value=movie.area) }}
+2. 原生方法，在视图函数中判断请求方法并直接设置初始值：
+    if request.method == &quot;GET&quot;:
+        form.info.data = movie.info
+        form.tag_id.data = movie.tag_id
+        form.star.data = movie.star
+</code></pre><h2 id="5-2-修改逻辑"><a href="#5-2-修改逻辑" class="headerlink" title="5.2 修改逻辑"></a>5.2 修改逻辑</h2><p>示例：</p>
+<pre><code>if form.validate_on_submit():
+    data = form.data
+    movie_count = Movie.query.filter_by(title=data[&quot;title&quot;]).count()
+    if movie_count == 1 and movie.title != data[&quot;title&quot;]:
+        flash(&quot;片名已经存在！&quot;, &quot;error&quot;)
+        return redirect(url_for(&quot;admin.movie_edit&quot;, id=id))
+
+    if not os.path.exists(app.config[&apos;UP_DIR&apos;]):
+        os.makedirs(app.config[&apos;UP_DIR&apos;])
+        os.chmod(app.config[&apos;UP_DIR&apos;], &apos;rw&apos;)
+
+    if form.url.data.filename != &quot;&quot;:
+        file_url = form.url.data.filename
+        movie.url = change_filename(file_url)
+        form.url.data.save(app.config[&apos;UP_DIR&apos;] + movie.url)
+
+    if form.logo.data.filename != &quot;&quot;:
+        file_logo = form.logo.data.filename
+        movie.logo = change_filename(file_logo)
+        form.logo.data.save(app.config[&apos;UP_DIR&apos;] + movie.logo)
+
+    # 修改
+    movie.title = data[&quot;title&quot;]
+    movie.star = data[&quot;star&quot;]
+    movie.tag_id = data[&quot;tag_id&quot;]
+    movie.info = data[&quot;info&quot;]
+    movie.area = data[&quot;area&quot;]
+    movie.length = data[&quot;length&quot;]
+    movie.release_time = data[&quot;release_time&quot;]
+    # 保存
+    db.session.add(movie)
+    db.session.commit()
+    flash(&quot;修改电影成功&quot;, &quot;ok&quot;)
+    return redirect(url_for(&quot;admin.movie_edit&quot;, id=id))
+</code></pre><p>其中，上传文件名的修改需要在初始化movie时设置：</p>
+<pre><code>form.url.validators = []
+form.logo.validators = []
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/flask-form/" rel="tag"># flask form</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/20/tag/" rel="next" title="标签管理">
+                <i class="fa fa-chevron-left"></i> 标签管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/tianxing.jpg"
+                alt="Zhang Cong" />
+            
+              <p class="site-author-name" itemprop="name">Zhang Cong</p>
+              <p class="site-description motion-element" itemprop="description">Be Strong.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/aicozone" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:413354463@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+<br>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=407002091&auto=1&height=66"></iframe>
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-后台页面的电影管理"><span class="nav-number">1.</span> <span class="nav-text">1. 后台页面的电影管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-添加电影"><span class="nav-number">2.</span> <span class="nav-text">2. 添加电影</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-MovieForm的创建"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 MovieForm的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-MovieForm的实例创建及模板渲染"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 MovieForm的实例创建及模板渲染</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-数据的接收与其逻辑判断"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 数据的接收与其逻辑判断</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-电影列表"><span class="nav-number">3.</span> <span class="nav-text">3. 电影列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-页面信息的创建"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 页面信息的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-模板的渲染"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 模板的渲染</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-电影删除"><span class="nav-number">4.</span> <span class="nav-text">4.电影删除</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-设置删除按钮"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 设置删除按钮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-增加删除逻辑"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 增加删除逻辑</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-电影编辑"><span class="nav-number">5.</span> <span class="nav-text">5. 电影编辑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-movie-edit-html的创建"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 movie_edit.html的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-修改逻辑"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 修改逻辑</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Cong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
